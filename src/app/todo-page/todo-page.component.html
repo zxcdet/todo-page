@@ -1,0 +1,13 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>
+      <button class="icon-delete" mat-icon-button (click)="onDelate()">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+      <h2>{{todo?.title}}</h2>
+      <p>Completed: {{todo?.completed}}</p>
+      <p>Id: {{todo?.id}}</p>
+      <p>UserId: {{todo?.userId}}</p>
+    </mat-card-title>
+  </mat-card>
+</div>

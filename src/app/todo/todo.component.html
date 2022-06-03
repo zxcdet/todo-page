@@ -1,0 +1,40 @@
+<div *ngIf="!isLoading">
+  <app-header-todo
+    [totalTodo]="totalTodo"
+    [completedTodo]="completedTodo"
+    [uncompletedTodo]="uncompletedTodo"
+  ></app-header-todo>
+  <div class="container">
+    <form class="example-form" fxLayout="row" fxLayoutAlign="center center" [formGroup]="form" (ngSubmit)="OnSubmit()">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Create todo</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+      <div>
+        <button mat-raised-button color="primary" class="btn" [disabled]="isDisable">Primary</button>
+      </div>
+    </form>
+  </div>
+  <div fxLayout="row wrap" class="center">
+    <div *ngFor="let todos of todoList | paginate: { itemsPerPage: 6,
+     currentPage: page,
+     totalItems: totalLenght
+  }">
+      <app-todo-page
+        [todo]="todos"
+        (deleteEvent)="deleteTodo($event)"
+      ></app-todo-page>
+    </div>
+  </div>
+  <ng-container class="center">
+    <pagination-controls
+      (pageChange)="page = $event"
+      (pageBoundsCorrection)="page = $event"
+      fxLayout="row"
+      fxLayoutAlign="center"
+    ></pagination-controls>
+  </ng-container>
+</div>
+<ng-container *ngIf="isLoading">
+  <mat-spinner class="mat-spinner"></mat-spinner>
+</ng-container>
